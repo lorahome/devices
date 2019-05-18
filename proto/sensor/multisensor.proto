@@ -1,0 +1,17 @@
+syntax = "proto3";
+package sensors;
+
+import "proto/sensor/base.proto";
+
+message MultiSensorStatus {
+    // An auto incremented value
+    uint32 sequence = 1;
+    // Control sum
+    uint32 crc = 2;
+
+    // Sensors
+    Temperature temperature = 3;
+    Humidity humidity = 4;
+    AmbientLight ambient_light = 5;
+    Battery battery = 6;
+}

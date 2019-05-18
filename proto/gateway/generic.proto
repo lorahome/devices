@@ -1,0 +1,21 @@
+syntax = "proto3";
+package gateway;
+
+message GatewayStatus {
+    // An auto increment value
+    uint64 sequence = 1;
+
+    // For devices with backup battery:
+    // true if running on battery
+    bool battery_mode = 2;
+
+    // Packet counters
+    uint64 lora_received = 20;
+    uint64 lora_send = 21;
+    uint64 network_received = 22;
+    uint64 network_send = 23;
+
+    // Error counters
+    uint64 lora_crc_error = 40;
+    uint64 spi_timeout = 41;
+}

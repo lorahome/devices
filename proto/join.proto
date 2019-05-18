@@ -1,0 +1,14 @@
+syntax = "proto3";
+package home;
+
+message JoinRequest {
+    // Unique Device ID
+    uint64 device_id = 1;
+    // Device details
+    string device_name = 2;
+    string device_manufacturer = 3;
+    string device_url = 4;
+    // protobuf urls
+    string proto_status_message_url = 10;
+    string proto_config_message_url = 11;
+}

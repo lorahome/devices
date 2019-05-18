@@ -1,0 +1,9 @@
+syntax = "proto3";
+package home;
+
+message StatusReport {
+    // Unique Device ID
+    uint64 device_id = 1;
+    // Status details - device specific
+    bytes details = 2;
+}
