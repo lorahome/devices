@@ -1,9 +1,8 @@
 syntax = "proto3";
-package home;
+package openiot;
 
 message StatusReport {
-    // Unique Device ID
-    uint64 device_id = 1;
-    // Status details - device specific
-    bytes details = 2;
+    uint64 device_id = 1;     // Unique Device ID
+    uint32 message_size = 2;  // Actual, decoded message size
+    bytes details = 3;        // Status details - device specific, maybe encrypted
 }

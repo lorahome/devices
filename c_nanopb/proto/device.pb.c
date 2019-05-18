@@ -8,7 +8,7 @@
 #error Regenerate this file with the current version of nanopb generator.
 #endif
 
-PB_BIND(home_StatusReport, home_StatusReport, AUTO)
+PB_BIND(openiot_StatusReport, openiot_StatusReport, AUTO)
 
 
 

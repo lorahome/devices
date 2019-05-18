@@ -8,7 +8,7 @@
 #error Regenerate this file with the current version of nanopb generator.
 #endif
 
-PB_BIND(sensors_MultiSensorStatus, sensors_MultiSensorStatus, AUTO)
+PB_BIND(sensor_MultiSensorStatus, sensor_MultiSensorStatus, AUTO)
 
 
 

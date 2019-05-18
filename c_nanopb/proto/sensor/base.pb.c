@@ -8,16 +8,16 @@
 #error Regenerate this file with the current version of nanopb generator.
 #endif
 
-PB_BIND(sensors_Temperature, sensors_Temperature, AUTO)
+PB_BIND(sensor_Temperature, sensor_Temperature, AUTO)
 
 
-PB_BIND(sensors_Humidity, sensors_Humidity, AUTO)
+PB_BIND(sensor_Humidity, sensor_Humidity, AUTO)
 
 
-PB_BIND(sensors_AmbientLight, sensors_AmbientLight, AUTO)
+PB_BIND(sensor_AmbientLight, sensor_AmbientLight, AUTO)
 
 
-PB_BIND(sensors_Battery, sensors_Battery, AUTO)
+PB_BIND(sensor_Battery, sensor_Battery, AUTO)
 
 
 
