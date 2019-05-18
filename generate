@@ -1,4 +1,4 @@
-mkdir -p c go c
-find . -name *.proto | xargs -L1 protoc --c_out=c
-find . -name *.proto | xargs -L1 protoc --plugin=protoc-gen-nanopb=/Users/belyalov/nanopb/generator/protoc-gen-nanopb --nanopb_out=c
-find . -name *.proto | xargs -L1 protoc --go_out=go
+mkdir -p c_nanopb/proto go
+cd proto
+find . -name "*.proto" | xargs -L1 protoc --plugin=protoc-gen-nanopb=/Users/belyalov/nanopb/generator/protoc-gen-nanopb --nanopb_out=../c_nanopb/proto
+find . -name "*.proto" | xargs -L1 protoc --go_out=../go

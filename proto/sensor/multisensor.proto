@@ -1,7 +1,7 @@
 syntax = "proto3";
 package sensors;
 
-import "proto/sensor/base.proto";
+import "sensor/base.proto";
 
 message MultiSensorStatus {
     // An auto incremented value
