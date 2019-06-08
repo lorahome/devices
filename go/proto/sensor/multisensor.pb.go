@@ -23,16 +23,17 @@ const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 type MultiSensorStatus struct {
 	// An auto incremented value
 	Sequence uint32 `protobuf:"varint,1,opt,name=sequence,proto3" json:"sequence,omitempty"`
-	// Control sum
-	Crc uint32 `protobuf:"varint,2,opt,name=crc,proto3" json:"crc,omitempty"`
+	// Magic number. Always 0x11223344
+	Magic uint32 `protobuf:"varint,2,opt,name=magic,proto3" json:"magic,omitempty"`
 	// Sensors
-	Temperature          *Temperature  `protobuf:"bytes,3,opt,name=temperature,proto3" json:"temperature,omitempty"`
-	Humidity             *Humidity     `protobuf:"bytes,4,opt,name=humidity,proto3" json:"humidity,omitempty"`
-	AmbientLight         *AmbientLight `protobuf:"bytes,5,opt,name=ambient_light,json=ambientLight,proto3" json:"ambient_light,omitempty"`
-	Battery              *Battery      `protobuf:"bytes,6,opt,name=battery,proto3" json:"battery,omitempty"`
-	XXX_NoUnkeyedLiteral struct{}      `json:"-"`
-	XXX_unrecognized     []byte        `json:"-"`
-	XXX_sizecache        int32         `json:"-"`
+	Temperature  *Temperature  `protobuf:"bytes,3,opt,name=temperature,proto3" json:"temperature,omitempty"`
+	Humidity     *Humidity     `protobuf:"bytes,4,opt,name=humidity,proto3" json:"humidity,omitempty"`
+	AmbientLight *AmbientLight `protobuf:"bytes,5,opt,name=ambient_light,json=ambientLight,proto3" json:"ambient_light,omitempty"`
+	// For battery power sensors - current battery state
+	Battery              *Battery `protobuf:"bytes,6,opt,name=battery,proto3" json:"battery,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *MultiSensorStatus) Reset()         { *m = MultiSensorStatus{} }
@@ -67,9 +68,9 @@ func (m *MultiSensorStatus) GetSequence() uint32 {
 	return 0
 }
 
-func (m *MultiSensorStatus) GetCrc() uint32 {
+func (m *MultiSensorStatus) GetMagic() uint32 {
 	if m != nil {
-		return m.Crc
+		return m.Magic
 	}
 	return 0
 }
@@ -102,27 +103,208 @@ func (m *MultiSensorStatus) GetBattery() *Battery {
 	return nil
 }
 
+type Temperature struct {
+	ValueC               float32  `protobuf:"fixed32,1,opt,name=value_c,json=valueC,proto3" json:"value_c,omitempty"`
+	ValueF               float32  `protobuf:"fixed32,2,opt,name=value_f,json=valueF,proto3" json:"value_f,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *Temperature) Reset()         { *m = Temperature{} }
+func (m *Temperature) String() string { return proto.CompactTextString(m) }
+func (*Temperature) ProtoMessage()    {}
+func (*Temperature) Descriptor() ([]byte, []int) {
+	return fileDescriptor_d5d97f563f9b4bde, []int{1}
+}
+
+func (m *Temperature) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_Temperature.Unmarshal(m, b)
+}
+func (m *Temperature) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_Temperature.Marshal(b, m, deterministic)
+}
+func (m *Temperature) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Temperature.Merge(m, src)
+}
+func (m *Temperature) XXX_Size() int {
+	return xxx_messageInfo_Temperature.Size(m)
+}
+func (m *Temperature) XXX_DiscardUnknown() {
+	xxx_messageInfo_Temperature.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_Temperature proto.InternalMessageInfo
+
+func (m *Temperature) GetValueC() float32 {
+	if m != nil {
+		return m.ValueC
+	}
+	return 0
+}
+
+func (m *Temperature) GetValueF() float32 {
+	if m != nil {
+		return m.ValueF
+	}
+	return 0
+}
+
+type Humidity struct {
+	Value                float32  `protobuf:"fixed32,1,opt,name=value,proto3" json:"value,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *Humidity) Reset()         { *m = Humidity{} }
+func (m *Humidity) String() string { return proto.CompactTextString(m) }
+func (*Humidity) ProtoMessage()    {}
+func (*Humidity) Descriptor() ([]byte, []int) {
+	return fileDescriptor_d5d97f563f9b4bde, []int{2}
+}
+
+func (m *Humidity) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_Humidity.Unmarshal(m, b)
+}
+func (m *Humidity) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_Humidity.Marshal(b, m, deterministic)
+}
+func (m *Humidity) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Humidity.Merge(m, src)
+}
+func (m *Humidity) XXX_Size() int {
+	return xxx_messageInfo_Humidity.Size(m)
+}
+func (m *Humidity) XXX_DiscardUnknown() {
+	xxx_messageInfo_Humidity.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_Humidity proto.InternalMessageInfo
+
+func (m *Humidity) GetValue() float32 {
+	if m != nil {
+		return m.Value
+	}
+	return 0
+}
+
+type AmbientLight struct {
+	Value                uint32   `protobuf:"varint,1,opt,name=value,proto3" json:"value,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *AmbientLight) Reset()         { *m = AmbientLight{} }
+func (m *AmbientLight) String() string { return proto.CompactTextString(m) }
+func (*AmbientLight) ProtoMessage()    {}
+func (*AmbientLight) Descriptor() ([]byte, []int) {
+	return fileDescriptor_d5d97f563f9b4bde, []int{3}
+}
+
+func (m *AmbientLight) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_AmbientLight.Unmarshal(m, b)
+}
+func (m *AmbientLight) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_AmbientLight.Marshal(b, m, deterministic)
+}
+func (m *AmbientLight) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_AmbientLight.Merge(m, src)
+}
+func (m *AmbientLight) XXX_Size() int {
+	return xxx_messageInfo_AmbientLight.Size(m)
+}
+func (m *AmbientLight) XXX_DiscardUnknown() {
+	xxx_messageInfo_AmbientLight.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_AmbientLight proto.InternalMessageInfo
+
+func (m *AmbientLight) GetValue() uint32 {
+	if m != nil {
+		return m.Value
+	}
+	return 0
+}
+
+type Battery struct {
+	Percent              uint32   `protobuf:"varint,1,opt,name=percent,proto3" json:"percent,omitempty"`
+	VoltageMv            uint32   `protobuf:"varint,2,opt,name=voltage_mv,json=voltageMv,proto3" json:"voltage_mv,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *Battery) Reset()         { *m = Battery{} }
+func (m *Battery) String() string { return proto.CompactTextString(m) }
+func (*Battery) ProtoMessage()    {}
+func (*Battery) Descriptor() ([]byte, []int) {
+	return fileDescriptor_d5d97f563f9b4bde, []int{4}
+}
+
+func (m *Battery) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_Battery.Unmarshal(m, b)
+}
+func (m *Battery) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_Battery.Marshal(b, m, deterministic)
+}
+func (m *Battery) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Battery.Merge(m, src)
+}
+func (m *Battery) XXX_Size() int {
+	return xxx_messageInfo_Battery.Size(m)
+}
+func (m *Battery) XXX_DiscardUnknown() {
+	xxx_messageInfo_Battery.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_Battery proto.InternalMessageInfo
+
+func (m *Battery) GetPercent() uint32 {
+	if m != nil {
+		return m.Percent
+	}
+	return 0
+}
+
+func (m *Battery) GetVoltageMv() uint32 {
+	if m != nil {
+		return m.VoltageMv
+	}
+	return 0
+}
+
 func init() {
 	proto.RegisterType((*MultiSensorStatus)(nil), "sensor.MultiSensorStatus")
+	proto.RegisterType((*Temperature)(nil), "sensor.Temperature")
+	proto.RegisterType((*Humidity)(nil), "sensor.Humidity")
+	proto.RegisterType((*AmbientLight)(nil), "sensor.AmbientLight")
+	proto.RegisterType((*Battery)(nil), "sensor.Battery")
 }
 
 func init() { proto.RegisterFile("proto/sensor/multisensor.proto", fileDescriptor_d5d97f563f9b4bde) }
 
 var fileDescriptor_d5d97f563f9b4bde = []byte{
-	// 233 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x54, 0x90, 0xc1, 0x4b, 0xc3, 0x30,
-	0x14, 0xc6, 0xe9, 0xa6, 0x75, 0xbc, 0x39, 0x9c, 0x51, 0x30, 0xec, 0x20, 0xc3, 0xd3, 0x04, 0xd9,
-	0x40, 0xf1, 0xe0, 0x51, 0x4f, 0x1e, 0xf4, 0x92, 0x79, 0x97, 0xa4, 0x3e, 0x5c, 0x60, 0x69, 0x6b,
-	0xf2, 0x72, 0xe8, 0xff, 0xe0, 0x1f, 0x2d, 0x4d, 0x9a, 0xda, 0xdd, 0xde, 0xf7, 0xfd, 0xbe, 0x1f,
-	0x84, 0xc0, 0x75, 0x6d, 0x2b, 0xaa, 0x36, 0x0e, 0x4b, 0x57, 0xd9, 0x8d, 0xf1, 0x7b, 0xd2, 0xf1,
-	0x5e, 0x07, 0xc0, 0xf2, 0x98, 0x16, 0x57, 0x07, 0x3b, 0x25, 0x1d, 0xc6, 0xc1, 0xcd, 0xef, 0x08,
-	0xce, 0xdf, 0x5b, 0x6d, 0x1b, 0xd0, 0x96, 0x24, 0x79, 0xc7, 0x16, 0x30, 0x71, 0xf8, 0xe3, 0xb1,
-	0x2c, 0x90, 0x67, 0xcb, 0x6c, 0x35, 0x13, 0x7d, 0x66, 0x73, 0x18, 0x17, 0xb6, 0xe0, 0xa3, 0x50,
-	0xb7, 0x27, 0x7b, 0x84, 0x29, 0xa1, 0xa9, 0xd1, 0x4a, 0xf2, 0x16, 0xf9, 0x78, 0x99, 0xad, 0xa6,
-	0xf7, 0x17, 0xeb, 0xee, 0x21, 0x1f, 0xff, 0x48, 0x0c, 0x77, 0xec, 0x0e, 0x26, 0x3b, 0x6f, 0xf4,
-	0x97, 0xa6, 0x86, 0x1f, 0x05, 0x67, 0x9e, 0x9c, 0xd7, 0xae, 0x17, 0xfd, 0x82, 0x3d, 0xc1, 0x4c,
-	0x1a, 0xa5, 0xb1, 0xa4, 0xcf, 0xbd, 0xfe, 0xde, 0x11, 0x3f, 0x0e, 0xca, 0x65, 0x52, 0x9e, 0x23,
-	0x7c, 0x6b, 0x99, 0x38, 0x95, 0x83, 0xc4, 0x6e, 0xe1, 0x44, 0x49, 0x22, 0xb4, 0x0d, 0xcf, 0x83,
-	0x74, 0x96, 0xa4, 0x97, 0x58, 0x8b, 0xc4, 0x55, 0x1e, 0x7e, 0xe5, 0xe1, 0x2f, 0x00, 0x00, 0xff,
-	0xff, 0x0e, 0x18, 0x76, 0x38, 0x58, 0x01, 0x00, 0x00,
+	// 310 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x54, 0x91, 0x4f, 0x4b, 0xf3, 0x40,
+	0x10, 0xc6, 0x69, 0xdf, 0xb7, 0x49, 0x9d, 0xb6, 0xa8, 0x6b, 0xc1, 0x45, 0x50, 0x4a, 0xf0, 0x50,
+	0x41, 0x5a, 0x50, 0x3c, 0x78, 0x12, 0x2b, 0x88, 0x07, 0x7b, 0x49, 0xbd, 0x97, 0x6d, 0x1c, 0xdb,
+	0x40, 0x36, 0xa9, 0x9b, 0xd9, 0x40, 0xbf, 0x85, 0x1f, 0x59, 0xb2, 0x7f, 0xda, 0x78, 0xcb, 0x6f,
+	0x7e, 0xcf, 0x43, 0x86, 0x59, 0xb8, 0xda, 0xaa, 0x82, 0x8a, 0x69, 0x89, 0x79, 0x59, 0xa8, 0xa9,
+	0xd4, 0x19, 0xa5, 0xf6, 0x7b, 0x62, 0x04, 0x0b, 0x2c, 0x45, 0x3f, 0x6d, 0x38, 0x9d, 0xd7, 0x76,
+	0x61, 0x78, 0x41, 0x82, 0x74, 0xc9, 0x2e, 0xa0, 0x5b, 0xe2, 0xb7, 0xc6, 0x3c, 0x41, 0xde, 0x1a,
+	0xb5, 0xc6, 0x83, 0x78, 0xcf, 0x6c, 0x08, 0x1d, 0x29, 0xd6, 0x69, 0xc2, 0xdb, 0x46, 0x58, 0x60,
+	0x0f, 0xd0, 0x23, 0x94, 0x5b, 0x54, 0x82, 0xb4, 0x42, 0xfe, 0x6f, 0xd4, 0x1a, 0xf7, 0xee, 0xce,
+	0x26, 0xee, 0x9f, 0x1f, 0x07, 0x15, 0x37, 0x73, 0xec, 0x16, 0xba, 0x1b, 0x2d, 0xd3, 0xcf, 0x94,
+	0x76, 0xfc, 0xbf, 0xe9, 0x9c, 0xf8, 0xce, 0x9b, 0x9b, 0xc7, 0xfb, 0x04, 0x7b, 0x84, 0x81, 0x90,
+	0xab, 0x14, 0x73, 0x5a, 0x66, 0xe9, 0x7a, 0x43, 0xbc, 0x63, 0x2a, 0x43, 0x5f, 0x79, 0xb6, 0xf2,
+	0xbd, 0x76, 0x71, 0x5f, 0x34, 0x88, 0xdd, 0x40, 0xb8, 0x12, 0x44, 0xa8, 0x76, 0x3c, 0x30, 0xa5,
+	0x63, 0x5f, 0x9a, 0xd9, 0x71, 0xec, 0x7d, 0xf4, 0x04, 0xbd, 0xc6, 0xbe, 0xec, 0x1c, 0xc2, 0x4a,
+	0x64, 0x1a, 0x97, 0x89, 0x39, 0x45, 0x3b, 0x0e, 0x0c, 0xbe, 0x1c, 0xc4, 0x97, 0x39, 0x85, 0x17,
+	0xaf, 0xd1, 0x08, 0xba, 0x7e, 0xf9, 0xfa, 0x5a, 0x66, 0xea, 0xba, 0x16, 0xa2, 0x6b, 0xe8, 0x37,
+	0x77, 0xfd, 0x9b, 0x1a, 0xf8, 0xd4, 0x0c, 0x42, 0xb7, 0x1c, 0xe3, 0x10, 0x6e, 0x51, 0x25, 0x98,
+	0x93, 0x8b, 0x78, 0x64, 0x97, 0x00, 0x55, 0x91, 0x91, 0x58, 0xe3, 0x52, 0x56, 0xee, 0x4d, 0x8e,
+	0xdc, 0x64, 0x5e, 0xad, 0x02, 0xf3, 0xdc, 0xf7, 0xbf, 0x01, 0x00, 0x00, 0xff, 0xff, 0xe9, 0x64,
+	0x40, 0x15, 0x10, 0x02, 0x00, 0x00,
 }

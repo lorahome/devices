@@ -11,5 +11,17 @@
 PB_BIND(sensor_MultiSensorStatus, sensor_MultiSensorStatus, AUTO)
 
 
+PB_BIND(sensor_Temperature, sensor_Temperature, AUTO)
+
+
+PB_BIND(sensor_Humidity, sensor_Humidity, AUTO)
+
+
+PB_BIND(sensor_AmbientLight, sensor_AmbientLight, AUTO)
+
+
+PB_BIND(sensor_Battery, sensor_Battery, AUTO)
+
+
 
 /* @@protoc_insertion_point(eof) */

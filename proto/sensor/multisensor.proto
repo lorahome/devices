@@ -1,17 +1,35 @@
 syntax = "proto3";
 package sensor;
 
-import "proto/sensor/base.proto";
-
 message MultiSensorStatus {
     // An auto incremented value
     uint32 sequence = 1;
-    // Control sum
-    uint32 crc = 2;
+    // Magic number. Always 0x11223344
+    uint32 magic = 2;
 
     // Sensors
-    Temperature temperature = 3;
-    Humidity humidity = 4;
+    Temperature  temperature = 3;
+    Humidity     humidity = 4;
     AmbientLight ambient_light = 5;
-    Battery battery = 6;
+
+    // For battery power sensors - current battery state
+    Battery      battery = 6;
+}
+
+message Temperature {
+    float value_c = 1;
+    float value_f = 2;
+}
+
+message Humidity {
+    float value = 1;
+}
+
+message AmbientLight {
+    uint32 value = 1;
+}
+
+message Battery {
+    uint32 percent = 1;
+    uint32 voltage_mv = 2;
 }
