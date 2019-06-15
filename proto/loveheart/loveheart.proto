@@ -1,0 +1,36 @@
+syntax = "proto3";
+package loveheart;
+
+message LoveHeartStatus {
+    // Sequence / magic number - always 0xddeeff
+    uint32 sequence = 1;
+    uint32 magic = 2;
+
+    // SI7021
+    uint32 temperature = 3;
+    uint32 humidity = 4;
+
+    // VEML6030
+    uint32 light_als = 5;
+    uint32 light_white = 6;
+
+    // Battery
+    float voltage = 7;
+
+    // Animation state
+    bool animation = 8;
+
+    // Errors
+    uint32 erros_i2c = 20;
+    uint32 errors_spi = 21;
+    uint32 errors_radio = 22;
+}
+
+message LoveHeartStatusResponse {
+    // Sequence / magic number - always 0xddeeff
+    uint32 sequence = 1;
+    uint32 magic = 2;
+
+    // Show heart animation or not
+    bool enable_animation = 3;
+}
