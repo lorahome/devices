@@ -22,7 +22,7 @@ typedef struct _loveheart_LoveHeartStatus {
     uint32_t humidity;
     uint32_t light_als;
     uint32_t light_white;
-    float voltage;
+    uint32_t voltage_mv;
     bool animation;
     uint32_t erros_i2c;
     uint32_t errors_spi;
@@ -52,7 +52,7 @@ typedef struct _loveheart_LoveHeartStatusResponse {
 #define loveheart_LoveHeartStatus_humidity_tag   4
 #define loveheart_LoveHeartStatus_light_als_tag  5
 #define loveheart_LoveHeartStatus_light_white_tag 6
-#define loveheart_LoveHeartStatus_voltage_tag    7
+#define loveheart_LoveHeartStatus_voltage_mv_tag 7
 #define loveheart_LoveHeartStatus_animation_tag  8
 #define loveheart_LoveHeartStatus_erros_i2c_tag  20
 #define loveheart_LoveHeartStatus_errors_spi_tag 21
@@ -69,7 +69,7 @@ X(a, STATIC, SINGULAR, UINT32, temperature, 3) \
 X(a, STATIC, SINGULAR, UINT32, humidity, 4) \
 X(a, STATIC, SINGULAR, UINT32, light_als, 5) \
 X(a, STATIC, SINGULAR, UINT32, light_white, 6) \
-X(a, STATIC, SINGULAR, FLOAT, voltage, 7) \
+X(a, STATIC, SINGULAR, UINT32, voltage_mv, 7) \
 X(a, STATIC, SINGULAR, BOOL, animation, 8) \
 X(a, STATIC, SINGULAR, UINT32, erros_i2c, 20) \
 X(a, STATIC, SINGULAR, UINT32, errors_spi, 21) \
@@ -92,7 +92,7 @@ extern const pb_msgdesc_t loveheart_LoveHeartStatusResponse_msg;
 #define loveheart_LoveHeartStatusResponse_fields &loveheart_LoveHeartStatusResponse_msg
 
 /* Maximum encoded size of messages (where known) */
-#define loveheart_LoveHeartStatus_size           64
+#define loveheart_LoveHeartStatus_size           65
 #define loveheart_LoveHeartStatusResponse_size   14
 
 #ifdef __cplusplus

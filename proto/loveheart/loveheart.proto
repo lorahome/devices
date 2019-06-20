@@ -15,7 +15,7 @@ message LoveHeartStatus {
     uint32 light_white = 6;
 
     // Battery
-    float voltage = 7;
+    uint32 voltage_mv = 7;
 
     // Animation state
     bool animation = 8;
