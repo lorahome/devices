@@ -24,6 +24,8 @@ typedef struct _loveheart_LoveHeartStatus {
     uint32_t light_white;
     uint32_t voltage_mv;
     bool animation;
+    bool charging;
+    uint32_t battery_percents;
     uint32_t erros_i2c;
     uint32_t errors_spi;
     uint32_t errors_radio;
@@ -40,9 +42,9 @@ typedef struct _loveheart_LoveHeartStatusResponse {
 
 
 /* Initializer values for message structs */
-#define loveheart_LoveHeartStatus_init_default   {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
+#define loveheart_LoveHeartStatus_init_default   {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
 #define loveheart_LoveHeartStatusResponse_init_default {0, 0, 0}
-#define loveheart_LoveHeartStatus_init_zero      {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
+#define loveheart_LoveHeartStatus_init_zero      {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
 #define loveheart_LoveHeartStatusResponse_init_zero {0, 0, 0}
 
 /* Field tags (for use in manual encoding/decoding) */
@@ -53,7 +55,9 @@ typedef struct _loveheart_LoveHeartStatusResponse {
 #define loveheart_LoveHeartStatus_light_als_tag  5
 #define loveheart_LoveHeartStatus_light_white_tag 6
 #define loveheart_LoveHeartStatus_voltage_mv_tag 7
+#define loveheart_LoveHeartStatus_battery_percents_tag 10
 #define loveheart_LoveHeartStatus_animation_tag  8
+#define loveheart_LoveHeartStatus_charging_tag   9
 #define loveheart_LoveHeartStatus_erros_i2c_tag  20
 #define loveheart_LoveHeartStatus_errors_spi_tag 21
 #define loveheart_LoveHeartStatus_errors_radio_tag 22
@@ -71,6 +75,8 @@ X(a, STATIC, SINGULAR, UINT32, light_als, 5) \
 X(a, STATIC, SINGULAR, UINT32, light_white, 6) \
 X(a, STATIC, SINGULAR, UINT32, voltage_mv, 7) \
 X(a, STATIC, SINGULAR, BOOL, animation, 8) \
+X(a, STATIC, SINGULAR, BOOL, charging, 9) \
+X(a, STATIC, SINGULAR, UINT32, battery_percents, 10) \
 X(a, STATIC, SINGULAR, UINT32, erros_i2c, 20) \
 X(a, STATIC, SINGULAR, UINT32, errors_spi, 21) \
 X(a, STATIC, SINGULAR, UINT32, errors_radio, 22)
@@ -92,7 +98,7 @@ extern const pb_msgdesc_t loveheart_LoveHeartStatusResponse_msg;
 #define loveheart_LoveHeartStatusResponse_fields &loveheart_LoveHeartStatusResponse_msg
 
 /* Maximum encoded size of messages (where known) */
-#define loveheart_LoveHeartStatus_size           65
+#define loveheart_LoveHeartStatus_size           73
 #define loveheart_LoveHeartStatusResponse_size   14
 
 #ifdef __cplusplus

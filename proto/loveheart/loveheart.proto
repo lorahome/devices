@@ -16,9 +16,11 @@ message LoveHeartStatus {
 
     // Battery
     uint32 voltage_mv = 7;
+    uint32 battery_percents = 10;
 
     // Animation state
     bool animation = 8;
+    bool charging = 9;
 
     // Errors
     uint32 erros_i2c = 20;
