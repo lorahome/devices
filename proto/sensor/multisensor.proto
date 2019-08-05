@@ -27,6 +27,7 @@ message Humidity {
 
 message AmbientLight {
     uint32 value = 1;
+    uint32 white_value = 2;
 }
 
 message Battery {

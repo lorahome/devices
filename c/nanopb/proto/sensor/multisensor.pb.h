@@ -17,6 +17,7 @@ extern "C" {
 /* Struct definitions */
 typedef struct _sensor_AmbientLight {
     uint32_t value;
+    uint32_t white_value;
 /* @@protoc_insertion_point(struct:sensor_AmbientLight) */
 } sensor_AmbientLight;
 
@@ -56,16 +57,17 @@ typedef struct _sensor_MultiSensorStatus {
 #define sensor_MultiSensorStatus_init_default    {0, 0, sensor_Temperature_init_default, sensor_Humidity_init_default, sensor_AmbientLight_init_default, sensor_Battery_init_default}
 #define sensor_Temperature_init_default          {0, 0}
 #define sensor_Humidity_init_default             {0}
-#define sensor_AmbientLight_init_default         {0}
+#define sensor_AmbientLight_init_default         {0, 0}
 #define sensor_Battery_init_default              {0, 0}
 #define sensor_MultiSensorStatus_init_zero       {0, 0, sensor_Temperature_init_zero, sensor_Humidity_init_zero, sensor_AmbientLight_init_zero, sensor_Battery_init_zero}
 #define sensor_Temperature_init_zero             {0, 0}
 #define sensor_Humidity_init_zero                {0}
-#define sensor_AmbientLight_init_zero            {0}
+#define sensor_AmbientLight_init_zero            {0, 0}
 #define sensor_Battery_init_zero                 {0, 0}
 
 /* Field tags (for use in manual encoding/decoding) */
 #define sensor_AmbientLight_value_tag            1
+#define sensor_AmbientLight_white_value_tag      2
 #define sensor_Battery_percent_tag               1
 #define sensor_Battery_voltage_mv_tag            2
 #define sensor_Humidity_value_tag                1
@@ -105,7 +107,8 @@ X(a, STATIC, SINGULAR, FLOAT, value, 1)
 #define sensor_Humidity_DEFAULT NULL
 
 #define sensor_AmbientLight_FIELDLIST(X, a) \
-X(a, STATIC, SINGULAR, UINT32, value, 1)
+X(a, STATIC, SINGULAR, UINT32, value, 1) \
+X(a, STATIC, SINGULAR, UINT32, white_value, 2)
 #define sensor_AmbientLight_CALLBACK NULL
 #define sensor_AmbientLight_DEFAULT NULL
 
@@ -129,10 +132,10 @@ extern const pb_msgdesc_t sensor_Battery_msg;
 #define sensor_Battery_fields &sensor_Battery_msg
 
 /* Maximum encoded size of messages (where known) */
-#define sensor_MultiSensorStatus_size            53
+#define sensor_MultiSensorStatus_size            59
 #define sensor_Temperature_size                  10
 #define sensor_Humidity_size                     5
-#define sensor_AmbientLight_size                 6
+#define sensor_AmbientLight_size                 12
 #define sensor_Battery_size                      12
 
 #ifdef __cplusplus
