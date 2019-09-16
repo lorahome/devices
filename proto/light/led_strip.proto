@@ -1,0 +1,12 @@
+syntax = "proto3";
+package light;
+
+message LedStripStatus {
+    // An auto incremented value
+    uint32 sequence = 1;
+    // Magic number. Always 0x33445566
+    uint32 magic = 2;
+
+    // LED strip channels, just value
+    repeated uint32 channels = 3;
+}
